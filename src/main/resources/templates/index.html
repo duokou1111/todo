@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>待办事项管理工具</title>
+		<link href="/css/common.css" type="text/css" rel="stylesheet">
+		<link href="/css/index.css"  type="text/css" rel="stylesheet"/>
+		<script src="/js/jquery.js"></script>
+		<script src="/js/common.js"></script>
+		<script src="/js/sockjs.min.js"></script>
+		<script src="/js/stomp.min.js"></script>
+	</head>
+	<body>
+		<div class="add-btn" onclick="add()">
+			<div style="font-size: 40px;line-height: 46px;text-align: center;color: #FFF;">+</div>
+		</div>
+		<div class="mask2">
+			<div class="message">
+				<div class="message-text">测试测试</div>
+				<div class="message-commit btn">确认</div>
+			</div>
+		</div>
+		<div class="mask">
+			<div class="add-page">
+				<div class="add-page-span">标题：</div>
+				<div class="add-page-line">
+					<input type="text" id="input-title" />
+				</div>
+				<div class="add-page-span">正文：</div>
+				<div class="add-page-line" style="height: 150px;">
+					<textarea id="input-body" style="width: 100%;height: 100%;border: none;resize: none;"></textarea>
+				</div>
+				<div class="add-page-span">到期时间：</div>
+				<div class="add-page-line">
+					<input id="input-date" type="datetime-local" style="border: none;outline: none;width: 100%;height: 100%;">
+				</div>
+				<div class="add-page-span">优先级：</div>
+				<div class="add-page-line"  style="border: none;">
+					<label>一般</label><input value="1" type="radio" style="margin-left: 10px;margin-right: 10px;" name="priority">
+					<label>重要</label><input value="2" type="radio" style="margin-left: 10px;margin-right: 10px;" name="priority">
+					<label>紧急</label><input value="3" type="radio" style="margin-left: 10px;margin-right: 10px;" name="priority">
+				</div>
+				<div class="add-page-submit btn" onclick="taskSubmit()">提交</div>
+				<div class="add-page-close" >×</div>
+			</div>
+		</div>
+		<div class="top">
+			<div class="top-logo"><img src="/img/logo.png"></div>
+			<div class="top-span">待办事项管理工具</div>
+			<div class="top-info">
+				<div>欢迎您</div>
+			</div>
+		</div>
+		<div class="sort">
+			<div class="sort-btn btn">排序</div>
+			<div class="sort-box">按到期时间排序<input type="radio" name="sortType" value="expire_date"> </div>
+			<div class="sort-box">按事情紧急程度排序<input type="radio" name="sortType" value="priority"> </div>
+			<div class="sort-btn btn" style="background-color: #2173FF;margin-left: 20px;">过滤</div>
+			<div class="sort-box">去除一般事件<input name="priority" type="checkbox" value="1"> </div>
+			<div class="sort-box">去除重要事件<input name="priority" type="checkbox" value="2"> </div>
+			<div class="sort-box">去除紧急事件<input name="priority" type="checkbox" value="3"> </div>
+			<div class="sort-box">选择到期时间 </div>
+			<input type="datetime-local" id="start-date" class="sort-date" />
+			<input type="datetime-local" id="end-date" class="sort-date"/>
+			<div class="sort-commit btn" >确定</div>
+		</div>
+		<div class="search">
+			<input type="text" name="keyword" id="keyword" placeholder="全局搜索"/>
+			<img src="/img/search.png">
+		</div>
+		<div class="content">
+			<div class="content-box" th:each="task,taskStat : ${list}">
+				<div class="content-box-decorate"></div>
+				<div class="content-box-left">
+					<div class="content-box-left-header" th:text="${task.title}">标题不知道取什么好</div>
+					<div class="content-box-left-body" th:text="${task.content}">标题不知道取什么好</div>
+				</div>
+				<div class="content-box-right">
+					<div class="content-box-right-span">到期时间：<span th:text="${#dates.format(task.expireTime, 'yyyy/MM/dd HH:mm')}">2020.10.22 10:22</span></div>
+					<div class="content-box-right-span">建立时间：<span th:text="${#dates.format(task.createDate, 'yyyy/MM/dd HH:mm')}">2020.10.22 10:22</span></div>
+					<div class="content-box-right-span">状态：<span th:text="${task.status}">已完成</span></div>
+					<div class="content-box-right-span" th:switch="${task.priority}">优先级：<span th:case="1" style="color: #67BC65;">一般</span><span th:case="2" style="color:#FFF143">重要</span><span th:case="3" style="color: #F47983;font-weight: bold;">紧急</span></div>
+					<div class="content-box-right-operate">
+						<div th:attr="id=${task.id}" class="content-box-right-btn btn" th:if="${task.status eq '进行中'}" style="background-color: #67BC65;" onclick="finish(this.id)">完成</div>
+						<div th:attr="id=${task.id}"  class="content-box-right-btn btn" style="background-color: #F47983;" onclick="del(this.id)">删除</div>
+						<div th:attr="id=${task.id}"  class="content-box-right-btn btn" th:if="${task.status eq '进行中'}" style="background-color: #d6ecf0;">分享</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="/js/index.js"></script>
+	<script src="/js/app.js"></script>
+</html>

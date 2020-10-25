@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.todo.respository.mapper.TaskMapper">
+    <resultMap id="task" type="com.todo.domain.Task">
+        <result property="id" column="id"></result>
+        <result property="title" column="title"></result>
+        <result property="priority" column="priority"></result>
+        <result property="content" column="content"></result>
+        <result property="expireTime" column="expire_date"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="status" column="status"></result>
+    </resultMap>
+    <insert id="saveTask" parameterType="com.todo.domain.Task"  useGeneratedKeys="true" keyProperty="id">
+  insert into task(title, content,expire_date,create_date,priority,status)
+   values(#{title}, #{content},#{expireTime},now(),#{priority},'进行中');
+    </insert>
+    <select id="queryAll" resultMap="task">
+        select * from task order by id desc
+    </select>
+    <update id="updateStatusById">
+        update task set status = #{status} where id=#{id}
+    </update>
+    <delete id="deleteById">
+        delete from task where id = #{id}
+    </delete>
+    <select id="query" resultMap="task">
+        select * from task
+        <where>
+            <if test="p1 != null">
+                priority != #{p1}
+            </if>
+            <if test="p2 != null">
+                and priority != #{p2}
+            </if>
+            <if test="p3 != null">
+                and priority != #{p3}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and expire_date BETWEEN #{startTime} and #{endTime}
+            </if>
+        </where>
+        <if test="sort != null">
+            order by #{sort}
+        </if>
+    </select>
+
+</mapper>

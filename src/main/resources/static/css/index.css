@@ -1,0 +1,32 @@
+body{min-width: 1320px;overflow-x: hidden;}
+.sort{width: 100%;height: 50px;background: #FAFAFA;border: 1px solid #FAFAFA;box-shadow: 0px 5px 3px rgba(1,1,1,0.3);overflow: hidden;}
+.sort-box{float: left;height: 30px;margin-top: 10px;line-height: 30px;margin-left: 20px;}
+.sort-box input{margin-left: 10px;margin-top: 5px;}
+.sort-date{width: 130px;height: 22px;margin-top: 14px;margin-left: 12px;}
+.sort-btn{cursor: auto;float: left;font-size: 13px;width: 50px;height: 32px;background: #67BC65;border-radius: 8px;margin-top: 9px;margin-left: 5%;line-height: 32px;}
+.sort-commit{width: 60px;height: 30px;margin-top: 10px;float: right;margin-right: 5%;border-radius: 12px;background:#F47983 ;line-height: 30px;}
+.sort-commit:hover{background:#FF7983;transition: all 0.4s;width: 70px;}
+.search{width: 50%;margin-left: 25%;border: 1px solid #CCC;border-radius: 12px;height: 34px;margin-top: 20px;position: relative;overflow: hidden;}
+.search img{height: 17px;top: 8px;right: 20px;width: 17px;position: absolute;cursor: pointer;}
+.search #keyword{width: calc(100% - 50px);margin-left: 10px;border: none;outline: none;height: 34px;}
+.content{width: 50%;margin-left: 25%;}
+.content-box{width: 100%;min-height: 150px;background: #FAFAFA;position: relative;margin-top: 25px;}
+.content-box-decorate{height: 40px;width: 2px;background: #67BC65;position: absolute;left: 0;top: 0;}
+.content-box-left{width: 60%;border-right: 1px dotted #67BC65;min-height:150px;overflow-x: hidden;float: left;min-height: 150px;}
+.content-box-right{width: 39%;float: left;min-height: 150px;position: relative;}
+.content-box-left-header{height: 40px;line-height: 40px;width: 100%;margin-left: 20px;}
+.content-box-left-body{width: 100%;min-height: 100px;height: auto;margin-left: 10px;margin-top: 10px;font-size: 13px;}
+.content-box-right-span{margin-top:10px;font-size: 13px;margin-left: 10px;}
+.content-box-right-operate{position: absolute;bottom: 6px;}
+.content-box-right-btn{width: 60px;height: 28px;line-height: 28px;margin-left: 10px;font-size: 13px;border-radius: 13px;float: left;}
+.add-btn{width: 50px;height: 50px;border-radius: 100%;background-color: #F47983;position: fixed;right: 50px;bottom: 50px;cursor: pointer;}
+.add-page{width: 400px;height: 560px;background: #FFF;position: absolute;margin-left: -200px;margin-top: 100px;left: 50%;}
+.add-page-line{width: 80%;margin-left: 10%;border: 1px solid #ccc;height: 34px;margin-top: 10px;}
+.add-page-span{margin-left: 10%;padding-top: 20px;}
+.message{width:300px;height:auto;background: #FFF;position: absolute;left:50%;top: 100px;margin-left: -150px;
+padding: 20px;}
+#input-title{width: 90%;margin-left: 3%;height: 100%;border: none;outline: none;}
+.add-page-submit{width: 120px;height: 40px;background: #FF7983;margin-left: 140px;margin-top: 20px;line-height: 40px;}
+.add-page-close{position: absolute;right: 8px;top: 4px;color: #6666;font-size: 26px;cursor: pointer;}
+.message-text{width: 100%;text-align: center;}
+.message-commit{width: 120px;height: 32px;line-height: 32px;border-radius: 10px;background: #F47983;margin-top:20px;margin-left: 90px;}
